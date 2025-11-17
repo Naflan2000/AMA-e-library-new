@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - AMA E-Library</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  form { width:400px; margin:30px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+  input, select, button { width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; font-size:16px; }
+  button { background:#3498db; color:#fff; border:none; cursor:pointer; }
+  button:hover { background:#2980b9; }
+</style>
+</head>
+<body>
+<h1 style="text-align:center;color:#3498db;">Admin Panel</h1>
+<form id="uploadForm">
+  <input type="text" name="title" placeholder="Book Title" required>
+  <input type="text" name="author" placeholder="Author" required>
+  <input type="text" name="desc" placeholder="Description" required>
+  <select name="category" required>
+    <option value="">Select Category</option>
+    <option value="Cybersecurity">Cybersecurity</option>
+    <option value="Networking">Networking</option>
+    <option value="Programming">Programming</option>
+  </select>
+  <input type="file" name="file" required>
+  <button type="submit">Upload Book</button>
+</form>
+
+<script>
+const form = document.getElementById('uploadForm');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const data = new FormData(form);
+  fetch('/upload', { method:'POST', body:data })
+    .then(res => res.json())
+    .then(res => {
+      if(res.success) { alert('Book uploaded successfully!'); form.reset(); }
+      else alert('Upload failed.');
+    });
+});
+</script>
+</body>
+</html>
+

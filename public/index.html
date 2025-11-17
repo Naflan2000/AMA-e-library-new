@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMA E-Library</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* Animated gradient background */
+body {
+  background: linear-gradient(-45deg, #3498db, #9b59b6, #2ecc71, #e67e22);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* Floating books animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Floating book images */
+.book-cover {
+  animation: float 4s ease-in-out infinite;
+  transition: transform 0.3s;
+}
+.book-card:hover .book-cover {
+  transform: scale(1.05);
+}
+
+/* Gradient animation keyframes */
+@keyframes gradientBG {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Particle container */
+#particles {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
+  z-index:0;
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<header>AMA E-Library</header>
+<div class="container">
+  <input type="text" id="searchBar" placeholder="Search for books...">
+  <div class="category-filter">
+    <button onclick="filterCategory('All')">All</button>
+    <button onclick="filterCategory('Programming')">Programming</button>
+    <button onclick="filterCategory('Networking')">Networking</button>
+    <button onclick="filterCategory('Cybersecurity')">Cybersecurity</button>
+  </div>
+  <div id="books" class="books-list"></div>
+</div>
+
+<script>
+// Fetch books from server
+let allBooks = [];
+fetch('/books')
+  .then(res => res.json())
+  .then(data => {
+    allBooks = data;
+    renderBooks(allBooks);
+  });
+
+function renderBooks(list){
+  const container = document.getElementById('books');
+  container.innerHTML = '';
+  list.forEach(b=>{
+    container.innerHTML += `
+    <div class="book-card">
+      <img class="book-cover" src="${b.cover || 'images/default.png'}" alt="cover">
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-description">${b.author} — ${b.desc}</div>
+        <div class="book-actions">
+          <a href="${b.file}" target="_blank">Read Now</a>
+          <a href="${b.file}" download>Download</a>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+// Search books
+document.getElementById('searchBar').addEventListener('input', e=>{
+  const query = e.target.value.toLowerCase();
+  renderBooks(allBooks.filter(b => b.title.toLowerCase().includes(query)));
+});
+
+// Filter by category
+function filterCategory(cat){
+  if(cat === 'All') renderBooks(allBooks);
+  else renderBooks(allBooks.filter(b => b.category === cat));
+}
+
+// Particle animation
+const particleContainer = document.getElementById('particles');
+for(let i=0;i<50;i++){
+  const div = document.createElement('div');
+  div.style.position = 'absolute';
+  div.style.width = div.style.height = Math.random()*6 + 4 + 'px';
+  div.style.background = 'rgba(255,255,255,'+Math.random()+')';
+  div.style.borderRadius = '50%';
+  div.style.top = Math.random()*window.innerHeight + 'px';
+  div.style.left = Math.random()*window.innerWidth + 'px';
+  div.style.animation = `floatParticle ${Math.random()*10+5}s ease-in-out infinite`;
+  particleContainer.appendChild(div);
+}
+</script>
+
+<style>
+@keyframes floatParticle {
+  0%{transform: translateY(0) translateX(0);}
+  50%{transform: translateY(-50px) translateX(20px);}
+  100%{transform: translateY(0) translateX(0);}
+}
+</style>
+
+</body>
+</html>

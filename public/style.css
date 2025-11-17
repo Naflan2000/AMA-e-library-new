@@ -1,0 +1,160 @@
+/* Global */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Header */
+header {
+  background: #2c3e50;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Containers */
+.container {
+  width: 90%;
+  margin: 20px auto;
+}
+
+/* Search bar */
+#searchBar {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Category buttons */
+.category-filter {
+  margin-bottom: 20px;
+}
+.category-filter button {
+  padding: 8px 15px;
+  margin-right: 10px;
+  border: none;
+  background: #3498db;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.category-filter button:hover {
+  background: #217dbb;
+}
+
+/* Book card */
+.book-card {
+  background: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Book cover */
+.book-cover {
+  width: 100px;
+  height: 140px;
+  margin-right: 20px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Book info */
+.book-info {
+  flex: 1;
+}
+.book-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.book-description {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Book actions */
+.book-actions a {
+  display: inline-block;
+  margin-right: 10px;
+  text-decoration: none;
+  padding: 8px 12px;
+  background: #3498db;
+  color: #fff;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+.book-actions a:hover {
+  background: #217dbb;
+}
+
+/* Forms (Login/Signup/Admin) */
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 350px;
+  margin: 30px auto;
+}
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+button {
+  background: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  background: #217dbb;
+}
+
+/* Welcome page */
+.welcome-container {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #3498db, #9b59b6);
+  color: white;
+}
+.welcome-container h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+.welcome-container p {
+  font-size: 20px;
+  margin-bottom: 40px;
+  animation: fadeIn 2s 0.5s ease-in-out;
+}
+.welcome-container button {
+  padding: 15px 30px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
